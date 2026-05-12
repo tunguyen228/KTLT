@@ -1,25 +1,28 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
+const int MAX_ROW = 4;
+const int MAX_COL = 3;
 
 int main() {
-	const int r = 4, c = 3;
-	int arr[r][c];
+	int arr[MAX_ROW][MAX_COL];
 	int i = 0;
 
-	while (i < r) {
-		cout << "Nhap phan tu cho mang thu " << i + 1 << ": ";
-		for (int j = 0; j < c; j++) {
-			cin >> arr[i][j];
+	while(i < MAX_ROW) {
+		for(int j = 0; j < MAX_COL; j++) {
+			cout<<"Nhap arr["<<i<<"]["<<j<<"] = ";
+			cin>>arr[i][j];
 		}
 		i++;
 	}
 
-	for (int i = 0; i < r; i++) {
-		for (int j = 0; j < c; j++) {
-			cout << setw(3) << arr[i][j] << " ";
+	i = 0;
+	while(i < MAX_ROW) {
+		for(int j = 0; j < MAX_COL; j++) {
+			cout<<setw(3)<<arr[i][j];
 		}
-		cout << endl;
+		cout<<endl;
+		i++;
 	}
 	return 0;
 }

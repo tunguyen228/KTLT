@@ -1,0 +1,10 @@
+So luong san pham: 3
+MaSP: sp01
+Ten SP: binh giu nhiet
+Don gia: 150
+MaSP: sp02
+Ten SP: may ep cam
+Don gia: 300
+MaSP: sp03
+Ten SP: biep dien tu
+Don gia: 1200

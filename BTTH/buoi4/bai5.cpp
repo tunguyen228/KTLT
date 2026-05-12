@@ -1,54 +1,49 @@
 #include <iostream>
-#include <conio.h>  
-#include <string.h> 
+#include <string>
 using namespace std;
 
+const char BACKSPACE = 127;
+const char ENTER = 10;
+
+string getPass(string prompt);
+
 int main() {
-    char password[11];      
-    char correctPass[] = "svCQ"; /
-    int count = 0;       
-    bool isSuccess = false;
-
-    while (count < 3) {
-        cout << "Nhap mat khau: ";
-        
-        int i = 0;
-        char ch;
-        while (true) {
-            ch = getch(); 
-
-            if (ch == 13) { // Nếu nhấn Enter
-                password[i] = '\0'; 
-                break;
-            } 
-            else if (ch == 8) { 
-                if (i > 0) {
-                    i--;
-                    cout << "\b \b"; 
-                }
-            } 
-            else { 
-                if (i < 10) { 
-                    password[i++] = ch;
-                    cout << "*"; 
-                }
-            }
-        }
-        cout << endl; 
-
-        if (strcmp(password, correctPass) == 0) {
-            cout << "Dang nhap thanh cong!" << endl;
-            isSuccess = true;
-            break; 
+    int dem = 0;
+    bool bTrue = true;
+    string password ="svCQ";
+    while(dem < 3) {
+        string input = getPass("Nhap mat khau* ");
+        if(input == password) {
+            bTrue = false;
+            break;
         } else {
-            count++;
-            if (count < 3) {
-                cout << "Nhap sai! Nhap lai!" << endl;
-            } else {
-                cout << "Ban da nhap sai qua 3 lan. Truy cap bi tu choi!" << endl;
+            dem++;
+            if(dem < 3) {
+                cout<<"Nhap lai\n";
             }
         }
     }
-
+    if(!bTrue) {
+        cout<<"Dang nhap thanh cong\n";
+    }
     return 0;
+}
+
+string getPass(string prompt) {
+    cout<<prompt;
+    string password;
+    char ch;
+    while((ch = getchar()) != ENTER) {
+        if(ch == BACKSPACE) {
+            if(password.length() > 0) {
+                cout<<"\b \b";
+                password.resize(password.length() - 1);
+            }
+        } else {
+            password += ch;
+            cout<<"*";
+        }
+    }
+    cout<<endl;
+    return password;
 }

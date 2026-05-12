@@ -3,13 +3,15 @@ using namespace std;
 
 int main() {
     int x, y;
-    int* p;
+    int *p;
     p = &x;
     *p = 80;
-    cout<<"Dia chi cua bien x: "<<&x<<endl;
-    cout<<"Dia chi luu trong con tro p: "<<p<<endl;
-    cout<<"Gia tri cua con tro p tro den: "<<*p<<endl;
-    cout<<"Gia tri cua bien x: "<<x<<endl;
+    cout<<"Dia chi cua bien x la "<< &x<<endl;
+    cout<<"Dia chi luu trong con tro p la "<<p<<endl;
+    cout<<"Gia tri cua bien ma con tro p tro den la "<<*p<<endl;
+    cout<<"Gia tri cua bien x la "<<x<<endl;
 
+    delete p;
+    p = NULL;
     return 0;
 }

@@ -1,21 +1,22 @@
 #include <iostream>
 using namespace std;
 
-int luyThua(int x, int n);
+int xMuN(int x, int n);
 
 int main() {
     int x, n;
-    cout<<"Nhap x: ";
+    cout<<"Nhap so nguyen x: ";
     cin>>x;
-    cout<<"Nhap n: ";
+    cout<<"Nhap so mu n: ";
     cin>>n;
-    cout<<x<<" luy thua "<<n<<" = "<<luyThua(x, n)<<endl;
+    cout<<x<< "^"<<n<<" = "<<xMuN(x, n)<<endl;
     return 0;
 }
 
-int luyThua(int x, int n) {
+int xMuN(int x, int n) {
     if(n == 0)
         return 1;
-    int kq = luyThua(x, n-1);
-    return x * kq;
+    if(n == 1)
+        return x;
+    return x * xMuN(x, n - 1);
 }

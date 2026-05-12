@@ -1,113 +1,108 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
+const int MAX = 5;
 
-const int MAX_ROW = 5, MAX_COL = 5;
+void nhapMang(int arr[MAX][MAX], int r, int c);
+void xuatMang(int arr[MAX][MAX], int r, int c);
+double avg(int arr[MAX][MAX], int r, int c);
+bool timX(int arr[MAX][MAX], int r, int c, int x, int &dH, int &dC);
+void swap(int &a, int &b);
+void hoanDoi(int arr[MAX][MAX], int r, int c, int a, int b);
+long tichCot(int arr[MAX][MAX], int r, int c, int tichC);
 
-void nhapMang(int arr[MAX_ROW][MAX_COL], int r, int c);
-void xuatMang(int arr[MAX_ROW][MAX_COL], int r, int c);
-float tinhTrungBinhCong(int arr[MAX_ROW][MAX_COL], int r, int c);
-bool timX(int arr[MAX_ROW][MAX_COL], int r, int c, int x, int &hang, int &cot);
-void hoanDoi(int arr[MAX_ROW][MAX_COL], int r, int c, int a, int b);
-int tichCot(int arr[MAX_ROW][MAX_COL], int r, int c, int cot);
+int main() {
+    int arr[MAX][MAX];
+    int r, c, x, dH, dC, a, b, tichC;
 
-int main()
-{
-    int arr[MAX_ROW][MAX_COL], r, c, x, hang, cot;
-    cout<<"Nhap so hang r va so cot c cua mang: ";
+    cout<<"Nhap so hang va so cot: ";
     cin>>r>>c;
     nhapMang(arr, r, c);
+
     xuatMang(arr, r, c);
-    cout<<"Trung binh cong cua mang = "<<tinhTrungBinhCong(arr, r, c)<<endl;
 
-    cout<<"Nhap so x can tim kiem: ";
+    cout<<"Trung binh cong cua mang = "<<avg(arr, r, c)<<endl;;
+
+    cout<<"Nhap so can tim trong mang: ";
     cin>>x;
-    if(timX(arr, r, c, x, hang, cot) != true) {
-        cout<<"Ma tran khong co so x cần tìm\n";
+    if(timX(arr, r, c, x, dH, dC)) {
+        cout<<"Vi tri cua x o hang "<<dH<<" - cot "<<dC<<endl;
     } else {
-        cout<<"So can tim la so "<<x<<" o vi tri hang "<<hang<<" va vi tri cot "<<cot<<endl;
+        cout<<"So can tim khong xuat hien trong mang\n";
     }
 
-    int a, b;
-    cout<<"Nhap 2 so muon hoan doi vi tri: ";
+    cout<<"Nhap 2 so muon hoan doi: ";
     cin>>a>>b;
-    if(timX(arr, r, c, x, hang, cot) != true) {
-        cout<<"Ma tran khong co so can timn";
-    } else {
-        
-
-        hoanDoi(arr, r, c, a, b);
-        cout<<"Ma tran moi:\n";
-        xuatMang(arr, r, c);
-    }
+    hoanDoi(arr, r, c, a, b);
+    xuatMang(arr, r, c);
 
     cout<<"Nhap cot muon tinh tich: ";
-    cin>>cot;
-    cout<<tichCot(arr, r, c, cot);
+    cin>>tichC;
+    cout<<"Ket qua tich o cot "<<tichC<<" = "<<tichCot(arr, r, c, tichC);
+
     return 0;
 }
 
-void nhapMang(int arr[MAX_COL][MAX_ROW], int r, int c) {
-    do {
-        if (r <= 0 || c <= 0 || r > MAX_ROW || c > MAX_COL) {
-            cout << "So hang hoac so cot khong hop le! Hay nhap lai\n";
-        }
-    }while(r <= 0 || c <= 0 || r > MAX_ROW || c > MAX_COL);
-
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
-            cout << "Nhap arr[" << i << "][" << j << "]= ";
-            cin >> arr[i][j];
+void nhapMang(int arr[MAX][MAX], int r, int c) {
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            cout<<"Nhap arr["<<i<<"]["<<j<<"] = ";
+            cin>>arr[i][j];
         }
     }
 }
 
-void xuatMang(int arr[MAX_COL][MAX_ROW], int r, int c) {
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
-            cout << arr[i][j] << "\t";
+void xuatMang(int arr[MAX][MAX], int r, int c) {
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
+            cout<<setw(4)<<arr[i][j];
         }
-        cout << endl;
-    }
+        cout<<endl;
+    } 
 }
 
-
-float tinhTrungBinhCong(int arr[MAX_COL][MAX_ROW], int r, int c) {
-    int sum = 0;
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
+double avg(int arr[MAX][MAX], int r, int c) {
+    double sum = 0;
+    for(int i = 0; i < r; i++) {
+        for(int j = 0; j < c; j++) {
             sum += arr[i][j];
         }
-    }
-    return sum / ( r * c);
-}
+    } 
+    return sum / (r * c);
+}  
 
-bool timX(int arr[MAX_ROW][MAX_COL], int r, int c, int x, int &hang, int &cot) {
+bool timX(int arr[MAX][MAX], int r, int c, int x, int &dH, int &dC) {
     for(int i = 0; i < r; i++) {
         for(int j = 0; j < c; j++) {
             if(arr[i][j] == x) {
-                hang = i;
-                cot = j;
+                dH = i;
+                dC = j;
                 return true;
             }
         }
-    }
+    } 
     return false;
 }
 
-void hoanDoi(int arr[MAX_ROW][MAX_COL], int r, int c, int a, int b) {
-    int hX, cX, hY, cY, tmp = 0;
-    timX(arr, r, c, a, hX, cX); 
-    timX(arr, r, c, b, hY, cY); 
-
-    tmp = a;
-    arr[hX][cX] = b;
-    arr[hY][cY] = tmp;      
+void swap(int &a, int &b) {
+    int tmp = a;
+    a = b;
+    b = tmp;
 }
 
-int tichCot(int arr[MAX_ROW][MAX_COL], int r, int c, int cot) {
-    int tich = 1;
+void hoanDoi(int arr[MAX][MAX], int r, int c, int a, int b) {
+    int rA, cA, rB, cB;
+    if(timX(arr, r, c, a, rA, cA) && timX(arr, r, c, b, rB, cB)) {
+        swap(arr[rA][cA], arr[rB][cB]);
+    } else {
+        cout<<"So khong hop le\n";
+    } 
+}
+
+long tichCot(int arr[MAX][MAX], int r, int c, int tichC) {
+    long tich = 1;
     for(int i = 0; i < r; i++) {
-        tich *= arr[i][cot];
-    }
+        tich *= arr[i][tichC];
+    } 
     return tich;
 }

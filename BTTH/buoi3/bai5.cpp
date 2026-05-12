@@ -5,7 +5,7 @@ void fib(int n);
 
 int main() {
     int n;
-    cout<<"Nhap n: ";
+    cout<<"Nhap so nguyen n > 1: ";
     cin>>n;
     fib(n);
     return 0;
@@ -17,12 +17,12 @@ void fib(int n) {
     v = new int;
     t = new int;
     *u = 0;
-    *v = 1; 
+    *v = 1;
     if(n == 0) return;
     if(n == 1) {
         cout<<"0\n";
         return;
-    } 
+    }
     cout<<"0\t1";
     int i = 2;
     while(i < n) {
@@ -34,5 +34,6 @@ void fib(int n) {
     }
     delete u;
     delete v;
-    delete t;
+    delete v;
+    cout<<endl;
 }

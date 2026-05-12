@@ -1,36 +1,44 @@
 #include <iostream>
-#include <ctime>
 using namespace std;
 
-void daoNguoc(int *arr, int n);
+void input(int *arr, int n);
+void output(int *arr, int n);
+void reverse(int *arr, int n);
 
 int main() {
-    srand(time(0));
     int n;
-    cout<<"Nhap n: ";
+    cout<<"Nhap so phan tu cua mang 1 chieu: ";
     cin>>n;
     int *arr = new int[n];
-    for(int i = 0; i < n; i++) {
-        arr[i] = rand() % 20;
-    }
-    for(int i = 0; i < n; i++) {
-        cout<<arr[i]<<"\t";
-    }
-    cout<<"\nMang sau khi dao nguoc: \n";
-    daoNguoc(arr, n);
-    
+    input(arr, n);
+    output(arr, n);
+    reverse(arr, n);
+
     delete[] arr;
     arr = NULL;
+
     return 0;
 }
 
-void daoNguoc(int *arr, int n){
-    for(int i = 0; i < n/2; i++) {
-        int tmp = arr[i];
-        arr[i] = arr[n-1-i];
-        arr[n-1-i] = tmp;
+void input(int *arr, int n) {
+    for(int i = 0; i < n; i++) {
+        arr[i] = rand() % 20 + 1;
     }
-     for(int i = 0; i < n; i++) {
+}
+
+void output(int *arr, int n) {
+    for(int i = 0; i < n; i++) {
         cout<<arr[i]<<"\t";
+    }  
+    cout<<endl; 
+}
+
+void reverse(int *arr, int n) {
+    int tmp;
+    for(int i = 0; i < n; i++) {
+        tmp = arr[n - 1];
+        arr[n - 1 ] = arr[n - 1 - i];
+        arr[n - 1 - i] = tmp;
     } 
+    output(arr, n);   
 }

@@ -5,13 +5,9 @@ int giaiThua(int n);
 
 int main() {
     int n;
-    do {
-        cout<<"Nhap n: ";
-        cin>>n;
-        if(n <= 0)
-            cout<<"Nhap lai n > 0\n";
-    }while(n <= 0);
-    cout<<"Tong giai thua tu 1 den "<<n<<" la: "<<giaiThua(n)<<endl;
+    cout<<"Nhap so nguyen n khong am: ";
+    cin>>n;
+    cout<<"Tong giai thua tu 1 den n = "<<giaiThua(n)<<endl;
     return 0;
 }
 

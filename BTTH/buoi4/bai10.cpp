@@ -28,9 +28,6 @@ int main() {
 
     cout << "Nhap gia tri n: ";
     cin >> n;
-
-    int n_chu = (n % 26 + 26) % 26;
-    int n_so = (n % 10 + 10) % 10;
     
     string ketQua = maHoa(input, n);
 

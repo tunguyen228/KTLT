@@ -1,24 +1,27 @@
 #include <iostream>
 #include <ctime>
-#include <cstdlib>
 using namespace std;
+const int MAX = 30;
 
 int main() {
-    srand(time(0));
-    const int MAX = 30;
-    int arr[MAX];
-    for(int i = 0; i < MAX; i++) {
-        arr[i] = rand() % 10;
-    }
+    int arr[MAX], n;
     int *p = arr;
-    cout<<"Ki phap do doi: \n";
-    for(int offset = 0; offset < MAX; offset++) {
-        cout<<*(p + offset)<<"\t";
+    srand(time(0));
+
+    cin>>n;
+
+    for(int i = 0; i < n; i++) {
+        arr[i] = rand() % 10 + 1; //*(p + i) = rand() % 10 + 1;
     }
-    cout<<"\nKi phap chi so: \n";
-    for(int i = 0; i < MAX; i++) {
-        cout<<p[i]<<"\t";
+
+    for(int i = 0; i < n; i++) {
+        cout<<arr[i]<<"\t";
     }
     cout<<endl;
+    for(int i = 0; i < n; i++) {
+        cout<<*(p + i)<<"\t";
+    } 
+
+    delete[] arr;
     return 0;
 }

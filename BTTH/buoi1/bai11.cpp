@@ -1,111 +1,154 @@
 #include <iostream>
 #include <iomanip>
 using namespace std;
-const int MAX_ROW = 13, MAX_COL = 6;
+const int MAX_ROW = 13;
+const int MAX_COL = 6;
 
-void khoiTao(char arr[MAX_ROW][MAX_COL]);
-void datVe(char arr[MAX_ROW][MAX_COL], int rowIndex, int colIndex);
+void khoiTaoMang(char arr[MAX_ROW][MAX_COL]);
+void xuatMang(char arr[MAX_ROW][MAX_COL]);
+bool kiemTraHangGhe(int choice, int hangGhe);
+bool kiemTraGhe(char soGhe);
+void datGhe(char arr[MAX_ROW][MAX_COL], char soGhe, int hangGhe);
 
 int main() {
-	char arr[MAX_ROW][MAX_COL];
-    int n, rowIndex, colIndex;
-    char y;
-    int choice;
+    char arr[MAX_ROW][MAX_COL];
+    int choice, hangGhe;
+    char soGhe;
 
-    khoiTao(arr);
-    cout<<"= = = SO DO GHE MAY BAY = = =\n";
-    cout << setw(7) << " "; 
-    for (char c = 'A'; c <= 'F'; c++) {
-        cout << setw(6) << c; 
-    }
-    cout << endl;
-    for(int i = 0; i < MAX_ROW; i++) {
-        cout<<"Hang "<<setw(2)<<i + 1;
-        for (int j = 0; j < MAX_COL; j++) {
-            cout<<setw(6)<<arr[i][j];
-        }
-        cout<<endl;
-    }
+    khoiTaoMang(arr);
+    xuatMang(arr);
+
     do {
-        cout<<"= = = Nhap loai ve muon mua = = =\n";
-        cout<<"0. Ve hang thuong gia (hang 1 & hang 2)\n";
-        cout<<"1. Ve hang pho thong (hang 3 -> hang 7)\n";
-        cout<<"2. Ve hang tiet kiem (hang 8 -> hang 13)\n";
+        cout<<"=== LOAI VE ===\n";
+        cout<<"1. Hang thuong gia\n";
+        cout<<"2. Hanng pho thong\n";
+        cout<<"3. Hang tiet kiem\n";
+        cout<<"0. Thoat chuong trinh\n";
         cout<<"Nhap lua chon: ";
-        cin>>n;
-        switch (n) {
-            case 0: 
-                cout<<"= = = Ve hang thuong gia = = =\n";
-                do {
-                    cout<<"Chon vi tri (hang 1 & hang 2): ";
-                    cin>>rowIndex>>y;
-                    y = toupper(y);
-                    colIndex = y - 'A';
-                    if(rowIndex > 2 || rowIndex < 1) {
-                        cout<<"Sai hang ghe hoac so ghe quy dinh.Vui long nhap lai\n";
-                    }
-                } while (rowIndex > 2 || rowIndex < 1);
-                datVe(arr, rowIndex, colIndex);
-                break;
-
-            case 1: 
-                cout<<"= = = Ve hang pho thong = = =\n";
-                do {
-                    cout<<"Chon vi tri (hang 3 -> hang 7): ";
-                    cin>>rowIndex>>y;
-                    y = toupper(y);
-                    colIndex = y - 'A';
-                    if(rowIndex > 7 || rowIndex < 3) {
-                        cout<<"Sai hang ghe hoac so ghe quy dinh.Vui long nhap lai\n";
-                    }
-                } while (rowIndex > 7 || rowIndex < 3);
-                datVe(arr, rowIndex, colIndex);
-                break;
-
-            case 2: 
-                cout<<"= = = Ve hang tiet kiem = = =\n";
-                do {
-                    cout<<"Chon vi tri (hang 8 -> hang 13): ";
-                    cin>>rowIndex>>y;
-                    y = toupper(y);
-                    colIndex = y - 'A';
-                    if(rowIndex > 13 || rowIndex < 8) {
-                        cout<<"Sai hang ghe hoac so ghe quy dinh.Vui long nhap lai\n";
-                    }
-                } while (rowIndex > 13 || rowIndex < 8);
-                datVe(arr, rowIndex, colIndex);
-                break;
-        }
-        cout<<"Tiep tuc dat ve (1 / 0): ";
         cin>>choice;
-        if(choice != 1)
-            cout<<"Cam on ban da su dung chuong trinh\n";
-    } while(choice == 1);
-	return 0;
+        switch(choice) {
+            case 0: 
+                cout<<"Cam on ban da su dung chuong trinh\n";
+                break;
+            case 1:
+                cout<<"--- Hang thuong gia ---\n";
+                do {
+                    cout<<"Nhap hang ghe (hang 1 -> hang 2): ";
+                    cin>>hangGhe;
+                    if(!kiemTraHangGhe(choice, hangGhe)) {
+                        cout<<"Nhap lai hang ghe!\n";
+                    }
+                }while(!kiemTraHangGhe(choice, hangGhe));
+                do {
+                    cout<<"Nhap so ghe: ";
+                    cin>>soGhe;
+                    if(!kiemTraGhe(soGhe)) {
+                        cout<<"Nhap lai so ghe!\n";
+                    }
+                }while(!kiemTraGhe(soGhe));
+                datGhe(arr, soGhe, hangGhe);
+                xuatMang(arr);
+                break;
+            case 2:
+                cout<<"--- Hang phong thong ---\n";
+                do {
+                    cout<<"Nhap hang ghe (hang 3 -> hang 7): ";
+                    cin>>hangGhe;
+                    if(!kiemTraHangGhe(choice, hangGhe)) {
+                        cout<<"Nhap lai hang ghe!\n";
+                    }
+                }while(!kiemTraHangGhe(choice, hangGhe));
+                do {
+                    cout<<"Nhap so ghe: ";
+                    cin>>soGhe;
+                    if(!kiemTraGhe(soGhe)) {
+                        cout<<"Nhap lai so ghe!\n";
+                    }
+                }while(!kiemTraGhe(soGhe));
+                datGhe(arr, soGhe, hangGhe);
+                xuatMang(arr);
+                break;
+            case 3:
+                cout<<"--- Hang tiet kiem ---\n";
+                do {
+                    cout<<"Nhap hang ghe (hang 8 -> hang 13): ";
+                    cin>>hangGhe;
+                    if(!kiemTraHangGhe(choice, hangGhe)) {
+                        cout<<"Nhap lai hang ghe!\n";
+                    }
+                }while(!kiemTraHangGhe(choice, hangGhe));
+                do {
+                    cout<<"Nhap so ghe: ";
+                    cin>>soGhe;
+                    if(!kiemTraGhe(soGhe)) {
+                        cout<<"Nhap lai so ghe!\n";
+                    }
+                }while(!kiemTraGhe(soGhe));
+                datGhe(arr, soGhe, hangGhe);
+                xuatMang(arr);
+                break;
+            default:
+                cout<<"Lua chon khong hop le!\n";
+                break;
+            }
+    }while(choice != 0);
+
+    return 0;
 }
 
-void khoiTao(char arr[MAX_ROW][MAX_COL]) {
+void khoiTaoMang(char arr[MAX_ROW][MAX_COL]) {
     for(int i = 0; i < MAX_ROW; i++) {
-        for (int j = 0; j < MAX_COL; j++) {
+        for(int j = 0; j < MAX_COL; j++) {
             arr[i][j] = '*';
         }
     }
 }
 
-void datVe(char arr[MAX_ROW][MAX_COL], int rowIndex, int colIndex) {
-    arr[rowIndex-1][colIndex] = 'X';
-    cout<<"= = = SO DO GHE MAY BAY = = =\n";
-    cout << setw(7) << " "; 
-    for (char c = 'A'; c <= 'F'; c++) {
-        cout << setw(6) << c; 
+void xuatMang(char arr[MAX_ROW][MAX_COL]) {
+    cout<<setw(7)<<" ";
+    for(char ghe = 'A'; ghe <= 'F'; ghe++) {
+        cout<<setw(5)<<ghe;
     }
-    cout << endl;
-
+    cout<<endl;
     for(int i = 0; i < MAX_ROW; i++) {
         cout<<"Hang "<<setw(2)<<i + 1;
         for(int j = 0; j < MAX_COL; j++) {
-            cout<<setw(6)<<arr[i][j];
+            cout<<setw(5)<<arr[i][j];
         }
         cout<<endl;
+    }
+}
+
+bool kiemTraHangGhe(int choice, int hangGhe) {
+    if(choice == 1) {
+        if(hangGhe == 1 || hangGhe == 2) {
+            return true;
+        }
+    } else if(choice == 2) {
+        if(hangGhe >= 3 && hangGhe <= 7) {
+            return true;
+        }
+    } else if (choice == 3) {
+        if(hangGhe >= 8 && hangGhe <= 13) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool kiemTraGhe(char soGhe) {
+    if(soGhe >= 'A' && soGhe <= 'F') {
+        return true;
+    }
+    return false;
+}
+
+void datGhe(char arr[MAX_ROW][MAX_COL], char soGhe, int hangGhe) {
+    int cot = soGhe - 'A';
+    int hang = hangGhe - 1;
+    for(int i = 0; i < MAX_ROW; i++) {
+        for(int j = 0; j < MAX_COL; j++) {
+            arr[hang][cot] = 'X';
+        }
     }
 }

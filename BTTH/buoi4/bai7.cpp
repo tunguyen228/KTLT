@@ -4,10 +4,8 @@
 using namespace std;
 
 string layTenThang(int m) {
-    string danhSachThang[] = {
-        "", "January", "February", "March", "April", "May", "June",
-        "July", "August", "September", "October", "November", "December"
-    };
+    string danhSachThang[] = {"", "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"};
     if (m >= 1 && m <= 12) {
         return danhSachThang[m];
     }

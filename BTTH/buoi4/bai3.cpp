@@ -1,33 +1,27 @@
 #include <iostream>
-#include <cstring>
-#include <cctype>
+#include <string>
 using namespace std;
 
-bool Palindrome(char *s);
+bool palindrome(string s);
+
 int main() {
-    char str[50];
-
+    string s;
     cout<<"Nhap chuoi: ";
-    cin>>str;
-
-    if(Palindrome(str)) {
-        cout<<"Chuoi "<<str<<" la chuoi doi xung\n";
+    cin>>s;
+    if(palindrome(s)) {
+        cout<<"Chuoi "<<s<<" la chuoi doi xung"<<endl;
     } else {
-        cout<<"Chuoi "<<str<<" khong phai la chuoi doi xung\n";
+        cout<<"Chuoi "<<s<<" khong phai la chuoi doi xung"<<endl;
     }
-
+    
     return 0;
 }
 
-bool Palindrome(char *s) {
-    char *right = s;
-    char *left = s + strlen(s) - 1;
-    while(right < left) {
-        if(tolower(*right) != tolower(*left)) {
+bool palindrome(string s) {
+    for(int i = 0; i < s.length()/2; i++) {
+        if(tolower(s[i]) != tolower(s[s.length() - 1 - i])) {
             return false;
         }
-        right++;
-        left--;
     }
     return true;
 }

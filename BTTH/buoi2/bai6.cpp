@@ -19,7 +19,6 @@ int thucHienDao(int n, int rev) {
     }
     int chuSoCuoi = n % 10;
     int kq = rev * 10 + chuSoCuoi;
-
     return thucHienDao(n / 10, kq);
 }
 

@@ -2,36 +2,39 @@
 #include <iomanip>
 using namespace std;
 
+const int MAX = 5;
+
 int main() {
-	const int MAX_ROW = 5, MAX_COL = 6;
-	int arr[MAX_ROW][MAX_COL];
+	int arr[MAX][MAX];
 	int n;
 
-	cout<<"Nhap cap cho ma tran (tu 2 -> 5): ";
+	cout<<"Nhap cap n cho ma tran: ";
 	cin>>n;
-
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			cout << "Nhap a[" << i << "][" << j << "] = ";
-			cin >> arr[i][j];
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < n; j++) {
+			cout<<"Nhap arr["<<i<<"]["<<j<<"] = ";
+			cin>>arr[i][j];
 		}
-		cout << endl;
 	}
 
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < n; j++) {
-			cout << setw(2) << arr[i][j];
+	for(int i = 0; i < n; i++) {
+		for(int j = 0; j < n; j++) {
+			cout<<setw(3)<<arr[i][j];
 		}
-		cout << endl;
+		cout<<endl;
 	}
 
-	int sumMain = 0, sumSub = 0;
-	for (int i = 0; i < n; i++) {
-		sumMain += arr[i][i];			//đường chéo chính: i = j
-		sumSub += arr[i][n - 1 - i];	//đường chéo phụ i + j = n - 1 ==> i = n - 1 - j
+	int sumP = 0, i = 0;
+	for(int j = n - 1; j >= 0; j--) {
+		sumP += arr[i++][j];
 	}
-	cout<<"Tong duong cheo chinh = "<<sumMain<<endl;
-	cout<<"Tong duong cheo phu = "<<sumSub<<endl;
+	cout<<"Tong gia tri tren duong cheo phu = "<<sumP<<endl;
+
+	int sumC = 0, j = 0;
+	for(int i = 0; i < n; i++) {
+		sumC += arr[i][j++];
+	}
+	cout<<"Tong gia tri tren duong cheo chinh = "<<sumC<<endl;
 
 	return 0;
 }

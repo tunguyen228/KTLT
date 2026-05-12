@@ -1,92 +1,61 @@
 #include <iostream>
-#include <cstring>
-#include <cctype>
+#include <string>
 using namespace std;
 
-void daoChuoi(char *s);
-int demSoTu(char *s);
-void chuanHoa(char *s);
+string daoChuoi(string s);
+int demSoTu(string s);
+string chuanHoa(string s);
 
 int main() {
-    char str[50];
-    cout<<"Nhap vao 1 chuoi: ";
-    cin.getline(str, 50);
-
-    cout<<"Chuoi sau khi chuan hoa: ";
-    chuanHoa(str);
-    cout<<str<<endl;
-
-    cout<<"So tu trong chuoi: "<<demSoTu(str)<<endl;
-
-    cout<<"Chuoi sau khi dao: ";
-    daoChuoi(str);
-    cout<<str<<endl;
-
-
-
+    string s;
+    cout<<"Nhap chuoi: ";
+    getline(cin, s);
+    cout<<"Chuoi sau khi dao: "<<daoChuoi(s)<<endl;
+    cout<<"So tu trong chuoi: "<<demSoTu(s)<<endl;
+    cout<<"Chuoi sau khi chuan hoa: "<<chuanHoa(s)<<endl;
     return 0;
 }
 
-void daoChuoi(char *s) {
-    char *left = s;
-    char *right = s + strlen(s) - 1;
-    while(left < right) {
-        char tmp = *left;
-        *left = *right;
-        *right = tmp;
-        right--;
-        left++;
+string daoChuoi(string s) {
+    int i = 0, j = s.length() - 1;
+    while(i < j) {
+        char tmp = s[i];
+        s[i] = s[j];
+        s[j] = tmp;
+        i++;
+        j--;
     }
+    return s;
 }
 
-int demSoTu(char *s) {
+int demSoTu(string s) {
     int count = 0;
-    bool tu1 = false;
-    char *p = s;
-    while(*p != '\0') {
-        if(isalpha(*p)) {
-            if(!tu1) {
-                count++;
-                tu1 = true;
-            }
-        } else  if(isspace(*p)){
-            tu1 = false;
+    for(int i = 0; i < s.length(); i++) {
+        if(isalpha(s[i])) {
+            count++;
         }
-        p++;
     }
     return count;
 }
 
-void chuanHoa(char *s){
-    bool tu = true;
-    for(int i = 0; s[i] != '\0'; i++) {
-        if(!isspace(s[i])) {
-            if(tu) {
-                s[i] = toupper(s[i]);
-            } else {
-                s[i] = tolower(s[i]);
-            }
-            tu = false;
-        } else {
-            tu = true;
+string chuanHoa(string s) {
+    for(int i = 0; i < s.length(); i++) {
+        s[i] = tolower(s[i]);
+        if(i == 0 || s[i - 1] == ' ') {
+            s[i] = toupper(s[i]);
         }
     }
-
-    bool tu2 = true;
-    int j = 0;
-    for(int i = 0; s[i] != '\0'; i++) {
-        if(!isspace(s[i])) {
-            s[j++] = s[i];
-            tu2 = false;
-        } else {
-            if(!tu2) {
-                s[j++] = ' ';
-                tu2 = true;
-            }
+    for(int i = 0; i < s.length(); i++) {
+        if(s[i] == ' ' && s[i + 1] == ' ') {
+            s.erase(i, 1);
+            i--;
         }
     }
-    if(j > 0 && s[j-1] == ' ') {
-        j--;
+    while(s.length() > 0 && s[0] == ' ') {
+        s.erase(0, 1);
     }
-    s[j] ='\0';
+    while(s.length() > 0 && s[s.length() - 1] == ' ') {
+        s.erase(s.length() - 1, 1);
+    }  
+    return s;
 }

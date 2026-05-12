@@ -8,10 +8,11 @@ int main() {
     getline(cin, s1);
     cout<<"Nhap chuoi s2: ";
     getline(cin, s2);
-    size_t pos;
-    while ((pos = s1.find(s2)) != string::npos) {
+    size_t pos = s1.find(s2);
+    while(pos != string::npos) {
         s1.erase(pos, s2.length());
+        pos = s1.find(s2);
     }
-    cout<<s1;
+    cout<<"Chuoi s1 sau khi xoa: "<<s1<<endl;
     return 0;
 }
